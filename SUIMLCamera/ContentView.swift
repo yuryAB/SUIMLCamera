@@ -7,15 +7,14 @@
 
 import SwiftUI
 import AVFoundation
-//import Vision
 import CoreML
+import CoreVideo
 
 struct ContentView: View {
     var body: some View {
         CameraView()
     }
 }
-
 
 struct CameraView: View {
     @StateObject var camera = CameraModel()
@@ -36,7 +35,7 @@ struct CameraView: View {
                                 .background(Color("SecondarySUIML"))
                                 .clipShape(Circle())
                         })
-                        .padding(.trailing, 10)
+                            .padding(.trailing, 10)
                     }
                     Spacer()
                 }
@@ -44,6 +43,9 @@ struct CameraView: View {
                 HStack {
                     if camera.isTaken {
                         Button(action: {if !camera.isSaved{camera.savePic()}}, label: {
+                            Text("Gato ou Cachorro!")
+                                .background(RoundedRectangle(cornerRadius: 4).stroke())
+                            Spacer()
                             Text(camera.isSaved ? "Saved":"Save")
                                 .foregroundColor(Color("MainSUIML"))
                                 .fontWeight(.semibold)
@@ -52,7 +54,7 @@ struct CameraView: View {
                                 .background(Color("SecondarySUIML"))
                                 .clipShape(Capsule())
                         })
-                        .padding(.leading)
+                            .padding(.leading)
                         Spacer()
                     } else {
                         Button(action: {camera.takePic()}, label: {
@@ -85,7 +87,7 @@ class CameraModel:  NSObject,ObservableObject, AVCapturePhotoCaptureDelegate {
     @Published var preview: AVCaptureVideoPreviewLayer!
     @Published var isSaved = false
     @Published var picData = Data(count: 0)
-
+    
     let catdogModel:CatDogML = {
         let model = try? CatDogML(configuration: MLModelConfiguration())
         return model!
@@ -159,37 +161,29 @@ class CameraModel:  NSObject,ObservableObject, AVCapturePhotoCaptureDelegate {
             let result = try? self.catdogModel.prediction(image: inputML.image)
             return result!
         }()
-
+        
         print(resultado.classLabel)
         print(resultado.classLabelProbs)
         
-        
-        
-        
-        
-        
-        
-        
-        
-//        do {
-//            let model = try VNCoreMLModel(for: self.mlModel.model)
-//            let request = VNCoreMLRequest(model: model, completionHandler: myResultsMethod)
-//            let handler = VNImageRequestHandler(cgImage: image.cgImage!)
-//            try handler.perform([request])
-//        } catch {
-//            print(error.localizedDescription)
-//        }
-//
-//
-//
-//        func myResultsMethod(request: VNRequest, error: Error?) {
-//            guard let results = request.results as? [VNClassificationObservation]
-//                else { fatalError("huh") }
-//            for classification in results {
-//                print(classification.identifier, // the scene label
-//                      classification.confidence)
-//            }
-//        }
+        //        do {
+        //            let model = try VNCoreMLModel(for: self.mlModel.model)
+        //            let request = VNCoreMLRequest(model: model, completionHandler: myResultsMethod)
+        //            let handler = VNImageRequestHandler(cgImage: image.cgImage!)
+        //            try handler.perform([request])
+        //        } catch {
+        //            print(error.localizedDescription)
+        //        }
+        //
+        //
+        //
+        //        func myResultsMethod(request: VNRequest, error: Error?) {
+        //            guard let results = request.results as? [VNClassificationObservation]
+        //                else { fatalError("huh") }
+        //            for classification in results {
+        //                print(classification.identifier, // the scene label
+        //                      classification.confidence)
+        //            }
+        //        }
         
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
         self.isSaved = true
@@ -225,8 +219,6 @@ struct CameraPreview: UIViewRepresentable {
         
     }
 }
-
-import CoreVideo
 
 struct ImageProcessor {
     static func pixelBuffer (forImage image:CGImage) -> CVPixelBuffer? {
