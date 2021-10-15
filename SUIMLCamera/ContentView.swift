@@ -7,8 +7,7 @@
 
 import SwiftUI
 import AVFoundation
-import CoreML
-import CoreVideo
+//import CoreML
 
 struct ContentView: View {
     var body: some View {
@@ -43,10 +42,7 @@ struct CameraView: View {
                 HStack {
                     if camera.isTaken {
                         Button(action: {if !camera.isSaved{camera.savePic()}}, label: {
-                            Text("Gato ou Cachorro!")
-                                .background(RoundedRectangle(cornerRadius: 4).stroke())
-                            Spacer()
-                            Text(camera.isSaved ? "Saved":"Save")
+                            Text(camera.isSaved ? camera.resultado:"Avaliar")
                                 .foregroundColor(Color("MainSUIML"))
                                 .fontWeight(.semibold)
                                 .padding(.vertical,10)
@@ -87,11 +83,12 @@ class CameraModel:  NSObject,ObservableObject, AVCapturePhotoCaptureDelegate {
     @Published var preview: AVCaptureVideoPreviewLayer!
     @Published var isSaved = false
     @Published var picData = Data(count: 0)
+    var resultado = "Resultado"
     
-    let catdogModel:CatDogML = {
-        let model = try? CatDogML(configuration: MLModelConfiguration())
-        return model!
-    }()
+//    let catdogModel:MeuModeloML = {
+//        let model = try? MeuModeloML(configuration: MLModelConfiguration())
+//        return model!
+//    }()
     
     func checkAuth() {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
@@ -155,37 +152,14 @@ class CameraModel:  NSObject,ObservableObject, AVCapturePhotoCaptureDelegate {
     
     func savePic() {
         let image = UIImage(data: self.picData)!
-        let inputML = CatDogMLInput(image: ImageProcessor.pixelBuffer(forImage: image.cgImage!)!)
+//        let inputML = MeuModeloML(image: ImageProcessor.pixelBuffer(forImage: image)!)
         
-        let resultado: CatDogMLOutput = {
-            let result = try? self.catdogModel.prediction(image: inputML.image)
-            return result!
-        }()
+//        let mlResult: MeuModeloML = {
+//            let result = try? self.catdogModel.prediction(image: inputML.image)
+//            return result!
+//        }()
         
-        print(resultado.classLabel)
-        print(resultado.classLabelProbs)
-        
-        //        do {
-        //            let model = try VNCoreMLModel(for: self.mlModel.model)
-        //            let request = VNCoreMLRequest(model: model, completionHandler: myResultsMethod)
-        //            let handler = VNImageRequestHandler(cgImage: image.cgImage!)
-        //            try handler.perform([request])
-        //        } catch {
-        //            print(error.localizedDescription)
-        //        }
-        //
-        //
-        //
-        //        func myResultsMethod(request: VNRequest, error: Error?) {
-        //            guard let results = request.results as? [VNClassificationObservation]
-        //                else { fatalError("huh") }
-        //            for classification in results {
-        //                print(classification.identifier, // the scene label
-        //                      classification.confidence)
-        //            }
-        //        }
-        
-        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+        //self.resultado = mlResult
         self.isSaved = true
         print("Saved")
     }
@@ -221,8 +195,8 @@ struct CameraPreview: UIViewRepresentable {
 }
 
 struct ImageProcessor {
-    static func pixelBuffer (forImage image:CGImage) -> CVPixelBuffer? {
-        
+    static func pixelBuffer (forImage im:UIImage) -> CVPixelBuffer? {
+        let image = im.cgImage!
         
         let frameSize = CGSize(width: image.width, height: image.height)
         

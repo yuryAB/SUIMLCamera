@@ -11,7 +11,6 @@
 		D092F1F727137F1100A0CEF2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D092F1F627137F1100A0CEF2 /* ContentView.swift */; };
 		D092F1F927137F1300A0CEF2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D092F1F827137F1300A0CEF2 /* Assets.xcassets */; };
 		D092F1FC27137F1300A0CEF2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D092F1FB27137F1300A0CEF2 /* Preview Assets.xcassets */; };
-		D092F2082714DB6500A0CEF2 /* CatDogML.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = D092F2072714DB6500A0CEF2 /* CatDogML.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,7 +20,6 @@
 		D092F1F827137F1300A0CEF2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D092F1FB27137F1300A0CEF2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D092F1FD27137F1300A0CEF2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D092F2072714DB6500A0CEF2 /* CatDogML.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = CatDogML.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,7 +36,6 @@
 		D092F1E827137F1100A0CEF2 = {
 			isa = PBXGroup;
 			children = (
-				D092F2072714DB6500A0CEF2 /* CatDogML.mlmodel */,
 				D092F1F327137F1100A0CEF2 /* SUIMLCamera */,
 				D092F1F227137F1100A0CEF2 /* Products */,
 			);
@@ -142,7 +139,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D092F1F727137F1100A0CEF2 /* ContentView.swift in Sources */,
-				D092F2082714DB6500A0CEF2 /* CatDogML.mlmodel in Sources */,
 				D092F1F527137F1100A0CEF2 /* SUIMLCameraApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -273,7 +269,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"SUIMLCamera/Preview Content\"";
-				DEVELOPMENT_TEAM = TSL9RRYSR6;
+				DEVELOPMENT_TEAM = ASRK7R7UY8;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = SUIMLCamera/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -295,7 +291,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"SUIMLCamera/Preview Content\"";
-				DEVELOPMENT_TEAM = TSL9RRYSR6;
+				DEVELOPMENT_TEAM = ASRK7R7UY8;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = SUIMLCamera/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
